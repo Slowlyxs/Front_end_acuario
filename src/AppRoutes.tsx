@@ -4,6 +4,7 @@ import About from './pages/About';
 import Galeria_peces from './pages/galeria_peces';
 import Contacto from './pages/contacto';
 import Proximamente from './pages/proximamente'; // Capitalized
+import LoginPage from './pages/LoginPage';
 
 export default function AppRoutes() {
   return (
@@ -13,6 +14,8 @@ export default function AppRoutes() {
         <Route path="/galeria_peces" element={<Galeria_peces/>} />
         <Route path="/contacto" element={<Contacto/>} />
         <Route path="/proximamente" element={<Proximamente/>} /> {/* Capitalized */}
+        <Route path= "/LoginPage" element={<LoginPage />} /> {/* Capitaized */}
+        {/* Add other routes as needed */}  
     </Routes>
   );
 }

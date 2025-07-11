@@ -28,13 +28,15 @@ function App() {
           </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
-              <li><a>Item 1</a></li>
-              <li><a>Item 2 </a></li>
-              <li><a>Item 3</a></li>
+              <Link to="/galeria_peces" className="btn btn-ghost text-xl">Productos</Link>
+              <Link to="/proximamente" className="btn btn-ghost text-xl">¡Proximamente!</Link>
+              <Link to="/About" className="btn btn-ghost text-xl">¡Sobre nosotros!</Link>
+              <Link to="/contacto" className="btn btn-ghost text-xl">Contacto</Link>
+
             </ul>
           </div>
           <div className="navbar-end">
-            <a className="btn">Button</a>
+            <Link to="/LoginPage" className="btn btn-ghost text-xl">Logear</Link>
           </div>
           <ThemeToggle />
         </div>

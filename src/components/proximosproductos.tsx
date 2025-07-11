@@ -5,7 +5,7 @@ export const ProximosProductos = () => {
     return (
         <div className="container mx-auto px-6 py-12 bg-gray-50 min-h-screen">
             <div className="text-center mb-12">
-                <h1 className="text-4xl font-bold text-gray-800 mb-6">Most Demanded Products</h1>
+                <h1 className="text-4xl font-bold text-gray-800 mb-6">Proximos productos</h1>
             </div>
 
             {/* Layout similar a la imagen con columnas */}
