@@ -2,12 +2,7 @@ import './App.css'
 import AppRoutes from './AppRoutes';
 import { Link } from 'react-router-dom';
 import { Piedepagina } from './components/Piedepagina';
-import AquariumHero from './components/AquiariumHero';
-import Carrusel from './components/carrusel';
 import ThemeToggle from './components/temapagina';
-import { CarruselOfertas } from './components/carrusel_ofertas';
-import { ProductCards } from './components/cards';
-import { ProximosProductos } from './components/proximosproductos';
 
 
 
@@ -43,10 +38,6 @@ function App() {
       </nav>
 
       <AppRoutes />
-      <Carrusel />
-      <ProductCards />
-      <CarruselOfertas />
-      <ProximosProductos />
       <Piedepagina />
 
     </>

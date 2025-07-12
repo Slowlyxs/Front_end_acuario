@@ -6,20 +6,9 @@ const Galeria_peces: React.FC = () => {
   // Datos de los peces con precios y descripciones
   const peces = [
     { id: 1, name: 'Pez Ángel', price: 45.99, description: 'Hermoso pez tropical de agua dulce', category: 'Tropicales' },
-    { id: 2, name: 'Goldfish', price: 12.50, description: 'Pez dorado clásico para principiantes', category: 'Agua fría' },
-    { id: 3, name: 'Betta Azul', price: 25.00, description: 'Pez luchador siamés de colores vibrantes', category: 'Bettas' },
-    { id: 4, name: 'Tetra Neón', price: 8.99, description: 'Pequeño pez de cardumen muy colorido', category: 'Tropicales' },
-    { id: 5, name: 'Guppy Fantasía', price: 15.75, description: 'Pez guppy con cola espectacular', category: 'Tropicales' },
-    { id: 6, name: 'Pez Payaso', price: 89.99, description: 'Famoso pez de arrecife marino', category: 'Marinos' },
-    { id: 7, name: 'Corydora', price: 18.50, description: 'Pez limpiador ideal para el fondo', category: 'Tropicales' },
-    { id: 8, name: 'Disco Rojo', price: 125.00, description: 'Pez disco premium de alta calidad', category: 'Premium' },
-    { id: 9, name: 'Molly Negro', price: 22.30, description: 'Pez molly resistente y activo', category: 'Tropicales' },
-    { id: 10, name: 'Koi Juvenil', price: 75.00, description: 'Carpa koi joven para estanques', category: 'Estanque' },
-    { id: 11, name: 'Platy Variado', price: 14.99, description: 'Pez platy de colores mixtos', category: 'Tropicales' },
-    { id: 12, name: 'Pez Cirujano', price: 155.00, description: 'Pez tang azul para acuarios marinos', category: 'Marinos' }
   ];
 
-  const categorias = ['All categories', 'Tropicales', 'Bettas', 'Marinos', 'Premium', 'Agua fría', 'Estanque'];
+  const categorias = ['Todos nuestros productos', 'Peces Ornamentales', 'Peces exóticos', 'Peceras', 'Plantas de Agua Dulce'];
 
   const handleBuyClick = (pez: any) => {
     alert(`¡Agregaste ${pez.name} al carrito por $${pez.price}!`);

@@ -11,51 +11,6 @@ const ProximamentePorLlegar: React.FC = () => {
       fechaLlegada: '2025-07-25',
       categoria: 'Marinos Premium',
       rareza: 'Muy Raro'
-    },
-    { 
-      id: 2, 
-      name: 'Arowana Dorado', 
-      price: 450.00, 
-      description: 'Pez dragón asiático de gran tamaño', 
-      fechaLlegada: '2025-08-01',
-      categoria: 'Exóticos',
-      rareza: 'Extremadamente Raro'
-    },
-    { 
-      id: 3, 
-      name: 'Pez Ángel Altum', 
-      price: 85.50, 
-      description: 'Variedad salvaje de pez ángel', 
-      fechaLlegada: '2025-07-30',
-      categoria: 'Tropicales Salvajes',
-      rareza: 'Raro'
-    },
-    { 
-      id: 4, 
-      name: 'Flowerhorn Premium', 
-      price: 125.00, 
-      description: 'Híbrido con joroba pronunciada', 
-      fechaLlegada: '2025-08-05',
-      categoria: 'Híbridos',
-      rareza: 'Raro'
-    },
-    { 
-      id: 5, 
-      name: 'Pez Napoleón Juvenil', 
-      price: 320.00, 
-      description: 'Pez marino de gran personalidad', 
-      fechaLlegada: '2025-08-10',
-      categoria: 'Marinos Grandes',
-      rareza: 'Muy Raro'
-    },
-    { 
-      id: 6, 
-      name: 'Betta Halfmoon Koi', 
-      price: 65.00, 
-      description: 'Betta con patrones tipo koi', 
-      fechaLlegada: '2025-07-28',
-      categoria: 'Bettas Premium',
-      rareza: 'Limitado'
     }
   ];
 
