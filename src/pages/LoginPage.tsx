@@ -63,7 +63,7 @@ const LoginPage: React.FC = () => {
               src="/imagenes/Chana.png"
               alt="Pez nadando"
               className="absolute w-100 animate-swim"
-              style={{ left: '%', top: '50%', transform: 'translateY(-50%)' }}
+              style={{ left: '10%', top: '50%', transform: 'translateY(-50%)' }}
             />
             <div className="absolute w-4 h-4 bg-white/30 rounded-full animate-bounce" style={{ left: '20%', top: '80%', animationDelay: '0s', animationDuration: '3s' }}></div>
             <div className="absolute w-2 h-2 bg-white/20 rounded-full animate-bounce" style={{ left: '30%', top: '70%', animationDelay: '1s', animationDuration: '2.5s' }}></div>

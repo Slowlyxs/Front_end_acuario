@@ -35,14 +35,6 @@ const About: React.FC = () => {
       especialidad: 'Equipos y filtración',
       descripcion: 'Especialista en sistemas de filtración y equipos de acuarios.'
     },
-    {
-      id: 4,
-      nombre: 'Ana Herrera',
-      puesto: 'Consultora de Cuidados',
-      experiencia: '10 años',
-      especialidad: 'Salud y nutrición',
-      descripcion: 'Veterinaria especializada en peces ornamentales y su nutrición.'
-    }
   ];
 
   // Valores de la empresa
