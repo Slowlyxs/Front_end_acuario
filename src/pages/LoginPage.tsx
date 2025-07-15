@@ -29,7 +29,7 @@ const LoginPage: React.FC = () => {
     }
 
     setIsLoading(true);
-    
+
     try {
       // Simular llamada a API
       await new Promise(resolve => setTimeout(resolve, 1500));
@@ -52,35 +52,43 @@ const LoginPage: React.FC = () => {
       {/* Lado izquierdo - Imagen de acuario */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-teal-600"></div>
-        <div className="absolute inset-0 bg-black/20"></div>
-        
+
+
+
         {/* Simulación de acuario con CSS */}
         <div className="relative w-full h-full flex items-center justify-center">
           {/* Burbujas animadas */}
           <div className="absolute inset-0">
-            <div className="absolute w-4 h-4 bg-white/30 rounded-full animate-bounce" style={{left: '20%', top: '80%', animationDelay: '0s', animationDuration: '3s'}}></div>
-            <div className="absolute w-2 h-2 bg-white/20 rounded-full animate-bounce" style={{left: '30%', top: '70%', animationDelay: '1s', animationDuration: '2.5s'}}></div>
-            <div className="absolute w-3 h-3 bg-white/25 rounded-full animate-bounce" style={{left: '70%', top: '60%', animationDelay: '2s', animationDuration: '4s'}}></div>
-            <div className="absolute w-5 h-5 bg-white/15 rounded-full animate-bounce" style={{left: '80%', top: '75%', animationDelay: '0.5s', animationDuration: '3.5s'}}></div>
-            <div className="absolute w-2 h-2 bg-white/30 rounded-full animate-bounce" style={{left: '15%', top: '50%', animationDelay: '1.5s', animationDuration: '2s'}}></div>
-            <div className="absolute w-3 h-3 bg-white/20 rounded-full animate-bounce" style={{left: '60%', top: '40%', animationDelay: '2.5s', animationDuration: '3s'}}></div>
+                       <img
+              src="/imagenes/Chana.png"
+              alt="Pez nadando"
+              className="absolute w-100 animate-swim"
+              style={{ left: '%', top: '50%', transform: 'translateY(-50%)' }}
+            />
+            <div className="absolute w-4 h-4 bg-white/30 rounded-full animate-bounce" style={{ left: '20%', top: '80%', animationDelay: '0s', animationDuration: '3s' }}></div>
+            <div className="absolute w-2 h-2 bg-white/20 rounded-full animate-bounce" style={{ left: '30%', top: '70%', animationDelay: '1s', animationDuration: '2.5s' }}></div>
+            <div className="absolute w-3 h-3 bg-white/25 rounded-full animate-bounce" style={{ left: '70%', top: '60%', animationDelay: '2s', animationDuration: '4s' }}></div>
+            <div className="absolute w-5 h-5 bg-white/15 rounded-full animate-bounce" style={{ left: '80%', top: '75%', animationDelay: '0.5s', animationDuration: '3.5s' }}></div>
+            <div className="absolute w-2 h-2 bg-white/30 rounded-full animate-bounce" style={{ left: '15%', top: '50%', animationDelay: '1.5s', animationDuration: '2s' }}></div>
+            <div className="absolute w-3 h-3 bg-white/20 rounded-full animate-bounce" style={{ left: '60%', top: '40%', animationDelay: '2.5s', animationDuration: '3s' }}></div>
+
           </div>
-          
+
           {/* Peces simulados */}
           <div className="absolute inset-0">
-            <div className="absolute w-8 h-4 bg-orange-400 rounded-full animate-pulse" style={{left: '25%', top: '30%', animationDelay: '0s'}}></div>
-            <div className="absolute w-6 h-3 bg-yellow-400 rounded-full animate-pulse" style={{left: '60%', top: '20%', animationDelay: '1s'}}></div>
-            <div className="absolute w-10 h-5 bg-blue-400 rounded-full animate-pulse" style={{left: '40%', top: '45%', animationDelay: '2s'}}></div>
-            <div className="absolute w-5 h-2 bg-pink-400 rounded-full animate-pulse" style={{left: '75%', top: '35%', animationDelay: '1.5s'}}></div>
+            <div className="absolute w-8 h-4 bg-orange-400 rounded-full animate-pulse" style={{ left: '25%', top: '30%', animationDelay: '0s' }}></div>
+            <div className="absolute w-6 h-3 bg-yellow-400 rounded-full animate-pulse" style={{ left: '60%', top: '20%', animationDelay: '1s' }}></div>
+            <div className="absolute w-10 h-5 bg-blue-400 rounded-full animate-pulse" style={{ left: '40%', top: '45%', animationDelay: '2s' }}></div>
+            <div className="absolute w-5 h-2 bg-pink-400 rounded-full animate-pulse" style={{ left: '75%', top: '35%', animationDelay: '1.5s' }}></div>
           </div>
-          
+
           {/* Plantas acuáticas */}
           <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-green-600/40 to-transparent"></div>
           <div className="absolute bottom-0 left-10 w-2 h-24 bg-green-500/60 rounded-t-full"></div>
           <div className="absolute bottom-0 left-20 w-3 h-28 bg-green-600/50 rounded-t-full"></div>
           <div className="absolute bottom-0 right-20 w-2 h-20 bg-green-500/70 rounded-t-full"></div>
           <div className="absolute bottom-0 right-10 w-3 h-26 bg-green-600/40 rounded-t-full"></div>
-          
+
           {/* Efecto de ondas */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent animate-pulse"></div>
