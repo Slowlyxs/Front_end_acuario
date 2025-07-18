@@ -2,24 +2,28 @@
 
 import type React from "react"
 import { useState, useEffect } from "react"
-import { useNavigate, Link } from "react-router-dom" // <--- IMPORTAR LINK
-import { Eye, EyeOff, User, Lock, AlertCircle } from "lucide-react"
+import { useNavigate, Link } from "react-router-dom"
+import { Eye, EyeOff, User, Mail, Lock, AlertCircle } from "lucide-react"
 import { useAuth } from "../hooks/useAuth"
 
 interface FormData {
   username: string
+  email: string
   password: string
+  confirmPassword: string
 }
 
-const LoginPage: React.FC = () => {
+const RegisterPage: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     username: "",
+    email: "",
     password: "",
+    confirmPassword: "",
   })
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState<string>("")
 
-  const { login, isLoading, isAuthenticated, user } = useAuth()
+  const { register, isLoading, isAuthenticated, user } = useAuth()
   const navigate = useNavigate()
 
   // Redireccionar si ya está autenticado
@@ -46,17 +50,33 @@ const LoginPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!formData.username || !formData.password) {
-      setError("Por favor completa todos los campos")
+    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
+      setError("Por favor completa todos los campos.")
+      return
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError("Las contraseñas no coinciden.")
+      return
+    }
+
+    if (formData.password.length < 6) {
+      setError("La contraseña debe tener al menos 6 caracteres.")
+      return
+    }
+
+    // Validación básica de email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      setError("Por favor, introduce un email válido.")
       return
     }
 
     try {
-      await login(formData.username, formData.password)
-      // La redirección se maneja en el useEffect
+      await register(formData.username, formData.email, formData.password)
+      // La redirección se maneja en el useEffect después de un registro exitoso
     } catch (err) {
-      // Cambiado a 'err' para evitar conflicto con 'error' de estado
-      setError(err instanceof Error ? err.message : "Error al iniciar sesión")
+      setError(err instanceof Error ? err.message : "Error al registrarse.")
     }
   }
 
@@ -66,7 +86,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className="min-h-screen flex">
-      {/* Lado izquierdo - Imagen de acuario (sin cambios, ya es visualmente atractiva) */}
+      {/* Lado izquierdo - Imagen de acuario (reutilizado de LoginPage) */}
       <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-teal-600"></div>
         <div className="absolute inset-0 bg-black/20"></div>
@@ -141,22 +161,18 @@ const LoginPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Lado derecho - Formulario de login */}
+      {/* Lado derecho - Formulario de registro */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gray-50">
         <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-xl">
-          {" "}
-          {/* Añadido padding y sombra */}
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-extrabold text-gray-900 mb-2">Iniciar Sesión</h1> {/* Más grande y negrita */}
-            <p className="text-gray-600 text-lg">Accede como usuario o administrador</p> {/* Más grande */}
+            <h1 className="text-4xl font-extrabold text-gray-900 mb-2">Registrarse</h1>
+            <p className="text-gray-600 text-lg">Crea tu cuenta para acceder a la tienda</p>
           </div>
           {/* Mensaje de error */}
           {error && (
             <div role="alert" className="alert alert-error mb-6">
-              {" "}
-              {/* DaisyUI alert */}
-              <AlertCircle className="w-6 h-6 stroke-current shrink-0" /> {/* Icono más grande */}
+              <AlertCircle className="w-6 h-6 stroke-current shrink-0" />
               <span>{error}</span>
             </div>
           )}
@@ -164,8 +180,6 @@ const LoginPage: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Campo Usuario */}
             <div className="form-control">
-              {" "}
-              {/* DaisyUI form-control */}
               <label htmlFor="username" className="label">
                 <span className="label-text text-gray-700 font-medium">Usuario</span>
               </label>
@@ -177,8 +191,28 @@ const LoginPage: React.FC = () => {
                   type="text"
                   value={formData.username}
                   onChange={handleInputChange}
-                  className="input input-bordered w-full pl-10 pr-4 py-3" // DaisyUI input
-                  placeholder="Ingresa tu usuario"
+                  className="input input-bordered w-full pl-10 pr-4 py-3"
+                  placeholder="Elige un nombre de usuario"
+                  disabled={isLoading}
+                />
+              </div>
+            </div>
+
+            {/* Campo Email */}
+            <div className="form-control">
+              <label htmlFor="email" className="label">
+                <span className="label-text text-gray-700 font-medium">Email</span>
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="input input-bordered w-full pl-10 pr-4 py-3"
+                  placeholder="tu@ejemplo.com"
                   disabled={isLoading}
                 />
               </div>
@@ -186,8 +220,6 @@ const LoginPage: React.FC = () => {
 
             {/* Campo Contraseña */}
             <div className="form-control">
-              {" "}
-              {/* DaisyUI form-control */}
               <label htmlFor="password" className="label">
                 <span className="label-text text-gray-700 font-medium">Contraseña</span>
               </label>
@@ -199,8 +231,8 @@ const LoginPage: React.FC = () => {
                   type={showPassword ? "text" : "password"}
                   value={formData.password}
                   onChange={handleInputChange}
-                  className="input input-bordered w-full pl-10 pr-12 py-3" // DaisyUI input
-                  placeholder="Ingresa tu contraseña"
+                  className="input input-bordered w-full pl-10 pr-12 py-3"
+                  placeholder="Crea tu contraseña"
                   disabled={isLoading}
                 />
                 <button
@@ -214,31 +246,57 @@ const LoginPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Botón de Login */}
+            {/* Campo Confirmar Contraseña */}
+            <div className="form-control">
+              <label htmlFor="confirmPassword" className="label">
+                <span className="label-text text-gray-700 font-medium">Confirmar Contraseña</span>
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type={showPassword ? "text" : "password"}
+                  value={formData.confirmPassword}
+                  onChange={handleInputChange}
+                  className="input input-bordered w-full pl-10 pr-12 py-3"
+                  placeholder="Repite tu contraseña"
+                  disabled={isLoading}
+                />
+                <button
+                  type="button"
+                  onClick={togglePasswordVisibility}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                  disabled={isLoading}
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
+
+            {/* Botón de Registro */}
             <button
               type="submit"
               disabled={isLoading}
-              className={`btn btn-primary btn-block mt-8 ${isLoading ? "btn-disabled" : ""}`} // DaisyUI button
+              className={`btn btn-primary btn-block mt-8 ${isLoading ? "btn-disabled" : ""}`}
             >
               {isLoading ? (
                 <>
-                  <span className="loading loading-spinner"></span> {/* DaisyUI spinner */}
-                  Iniciando sesión...
+                  <span className="loading loading-spinner"></span>
+                  Registrando...
                 </>
               ) : (
-                "Iniciar Sesión"
+                "Registrarse"
               )}
             </button>
           </form>
           {/* Información adicional */}
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              ¿No tienes cuenta?{" "}
-              <Link to="/register" className="link link-hover text-blue-600 font-medium">
-                {" "}
-                {/* <--- CAMBIO AQUÍ */}
-                Regístrate aquí
-              </Link>{" "}
+              ¿Ya tienes cuenta?{" "}
+              <Link to="/login" className="link link-hover text-blue-600 font-medium">
+                Inicia Sesión aquí
+              </Link>
             </p>
           </div>
         </div>
@@ -247,4 +305,4 @@ const LoginPage: React.FC = () => {
   )
 }
 
-export default LoginPage
+export default RegisterPage
