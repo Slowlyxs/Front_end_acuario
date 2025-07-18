@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AquariumHero: React.FC = () => {
+const Acuario_Dulcevida: React.FC = () => {
   return (
     <div className="hero min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden">
       {/* Animated background elements */}
@@ -124,4 +124,4 @@ const AquariumHero: React.FC = () => {
   );
 };
 
-export default AquariumHero;
+export default Acuario_Dulcevida;

@@ -5,7 +5,7 @@ import { CarruselOfertas } from '../components/carrusel_ofertas';
 import { ProximosProductos } from '../components/proximosproductos';
 import { Link } from 'react-router-dom';
 
-const AquariumHero: React.FC = () => {
+const Acuario_Dulcevida: React.FC = () => {
   return (
     <>
       <div className="hero min-h-screen bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 relative overflow-hidden">
@@ -133,4 +133,4 @@ const AquariumHero: React.FC = () => {
   );
 };
 
-export default AquariumHero;
+export default Acuario_Dulcevida;
