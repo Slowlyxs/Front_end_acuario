@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const About: React.FC = () => {
   // Estadísticas clave de la empresa
@@ -9,33 +10,8 @@ const About: React.FC = () => {
     { numero: '24/7', texto: 'Soporte técnico', icono: '🛠️' }
   ];
 
-  // Información del equipo
-  const equipo = [
-    {
-      id: 1,
-      nombre: 'Carlos Mendoza',
-      puesto: 'Fundador & Acuarista Experto',
-      experiencia: '20 años',
-      especialidad: 'Peces tropicales y marinos',
-      descripcion: 'Biólogo marino con pasión por la acuariofilia desde la infancia.'
-    },
-    {
-      id: 2,
-      nombre: 'María González',
-      puesto: 'Especialista en Agua Dulce',
-      experiencia: '12 años',
-      especialidad: 'Peces de agua dulce y plantas',
-      descripcion: 'Experta en ecosistemas de agua dulce y cuidado de plantas acuáticas.'
-    },
-    {
-      id: 3,
-      nombre: 'Roberto Silva',
-      puesto: 'Técnico en Sistemas',
-      experiencia: '8 años',
-      especialidad: 'Equipos y filtración',
-      descripcion: 'Especialista en sistemas de filtración y equipos de acuarios.'
-    },
-  ];
+  // Estado para equipo cargado desde backend
+  const [equipo, setEquipo] = useState<any[]>([]);
 
   // Valores de la empresa
   const valores = [
@@ -47,7 +23,7 @@ const About: React.FC = () => {
     {
       icono: '🔬',
       titulo: 'Conocimiento Experto',
-      descripcion: 'Nuestro equipo cuenta con décadas de experiencia en acuariofilia y proximamentebiología marina.'
+      descripcion: 'Nuestro equipo cuenta con décadas de experiencia en acuariofilia y próximamente biología marina.'
     },
     {
       icono: '💚',
@@ -60,6 +36,13 @@ const About: React.FC = () => {
       descripcion: 'Ofrecemos asesoría personalizada para cada cliente según sus necesidades específicas.'
     }
   ];
+
+  // Cargar equipo desde backend al montar componente
+  useEffect(() => {
+    axios.get('https://acuario-backends.onrender.com/equipo')
+      .then(res => setEquipo(res.data))
+      .catch(err => console.error('Error cargando equipo:', err));
+  }, []);
 
   return (
     <div className="bg-base-100 text-base-content">
@@ -110,14 +93,13 @@ const About: React.FC = () => {
               </p>
             </div>
           </div>
-            <img
-              src="./imagenes/instalaciones.jpeg"
-              className="w-full object-cover rounded-2xl shadow-lg"
-              alt="Instalaciones"
-            />
+          <img
+            src="./imagenes/instalaciones.jpeg"
+            className="w-full object-cover rounded-2xl shadow-lg"
+            alt="Instalaciones"
+          />
         </div>
       </section>
-
 
       {/* Valores con DaisyUI - card */}
       <section className="py-16 bg-base-200">
@@ -142,24 +124,28 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12">Conoce a Nuestro Equipo</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {equipo.map((miembro) => (
-              <div key={miembro.id} className="card bg-base-100 shadow-xl">
-                <figure>
-                  <img
-                    src={`https://flowbite.s3.amazonaws.com/docs/gallery/square/image-${miembro.id + 2}.jpg`}
-                    alt={miembro.nombre}
-                    className="w-full h-48 object-cover"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h3 className="card-title">{miembro.nombre}</h3>
-                  <p className="text-primary">{miembro.puesto}</p>
-                  <p className="text-sm"><strong>Experiencia:</strong> {miembro.experiencia}</p>
-                  <p className="text-sm"><strong>Especialidad:</strong> {miembro.especialidad}</p>
-                  <p className="text-xs opacity-80">{miembro.descripcion}</p>
+            {equipo.length > 0 ? (
+              equipo.map((miembro) => (
+                <div key={miembro.id} className="card bg-base-100 shadow-xl">
+                  <figure>
+                    <img
+                      src={miembro.foto || `https://flowbite.s3.amazonaws.com/docs/gallery/square/image-${miembro.id + 2}.jpg`}
+                      alt={miembro.nombre}
+                      className="w-full h-48 object-cover"
+                    />
+                  </figure>
+                  <div className="card-body">
+                    <h3 className="card-title">{miembro.nombre}</h3>
+                    <p className="text-primary">{miembro.puesto}</p>
+                    <p className="text-sm"><strong>Experiencia:</strong> {miembro.experiencia}</p>
+                    <p className="text-sm"><strong>Especialidad:</strong> {miembro.especialidad}</p>
+                    <p className="text-xs opacity-80">{miembro.descripcion}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="text-center text-gray-500">Cargando equipo...</p>
+            )}
           </div>
         </div>
       </section>

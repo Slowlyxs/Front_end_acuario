@@ -1,37 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+interface Pez {
+  _id: string;
+  nombre: string;
+  descripcion: string;
+  fechaLlegada: string;
+  imagen: string;
+  categoria: string;
+}
 
 const ProximamentePorLlegar: React.FC = () => {
-  // Datos de los peces que llegarán próximamente
-  const pecesProximos = [
-    { 
-      id: 1, 
-      name: 'Pez Mandarín', 
-      price: 199.99, 
-      description: 'Pez marino de colores espectaculares', 
-      fechaLlegada: '2025-07-25',
-      categoria: 'Marinos Premium',
-      rareza: 'Muy Raro'
-    }
-  ];
+  const [pecesProximos, setPecesProximos] = useState<Pez[]>([]);
+
+  useEffect(() => {
+    axios.get('https://acuario-backends.onrender.com/proximos-productos')
+      .then(res => setPecesProximos(res.data))
+      .catch(err => console.error('Error al obtener productos:', err));
+  }, []);
 
   const formatearFecha = (fecha: string) => {
     const date = new Date(fecha);
-    return date.toLocaleDateString('es-ES', { 
-      day: 'numeric', 
-      month: 'long', 
-      year: 'numeric' 
-    });
+    return date.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
   };
 
   const getDiasRestantes = (fecha: string) => {
     const hoy = new Date();
-    const fechaLlegada = new Date(fecha);
-    const diferencia = Math.ceil((fechaLlegada.getTime() - hoy.getTime()) / (1000 * 3600 * 24));
-    return diferencia;
+    const llegada = new Date(fecha);
+    return Math.ceil((llegada.getTime() - hoy.getTime()) / (1000 * 3600 * 24));
   };
 
-  const getRarezaColor = (rareza: string) => {
-    switch(rareza) {
+  const getRarezaColor = (categoria: string) => {
+    switch (categoria) {
       case 'Limitado': return 'bg-green-100 text-green-800';
       case 'Raro': return 'bg-yellow-100 text-yellow-800';
       case 'Muy Raro': return 'bg-orange-100 text-orange-800';
@@ -40,117 +40,57 @@ const ProximamentePorLlegar: React.FC = () => {
     }
   };
 
-  const handleNotificarme = (pez: any) => {
-    alert(`¡Te notificaremos cuando llegue ${pez.name}!`);
+  const handleNotificarme = (pez: Pez) => {
+    const mensaje = `¡Hola! Estoy interesado en el producto "${pez.nombre}" que llegará el ${formatearFecha(pez.fechaLlegada)}. ¿Me puedes notificar cuando esté disponible?`;
+    const telefono = '593969796517'; // Reemplaza por tu número en formato internacional (sin +)
+    const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+    window.open(url, '_blank');
   };
 
   return (
     <div className="py-8 px-4 bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
       <div className="max-w-7xl mx-auto">
-        {/* Header de la sección */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            🐠 Próximamente por Llegar
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Especies exclusivas y raras que llegarán próximamente a nuestra tienda. 
-            ¡Reserva tu lugar en la lista de espera!
-          </p>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">🐠 Próximamente por Llegar</h2>
+          <p className="text-xl text-gray-600">Reserva tu lugar en la lista de espera</p>
         </div>
 
-        {/* Grid de peces próximos */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {pecesProximos.map((pez) => (
-            <div key={pez.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <div key={pez._id} className="bg-white rounded-xl shadow-lg hover:scale-105 transition-all">
               <div className="relative">
-                <img
-                  className="w-full h-56 object-cover"
-                  src={`https://flowbite.s3.amazonaws.com/docs/gallery/square/image-${pez.id}.jpg`}
-                  alt={pez.name}
-                />
-                
-                {/* Overlay de "Próximamente" */}
+                <img className="w-full h-56 object-cover" src={pez.imagen || 'https://via.placeholder.com/300'} alt={pez.nombre} />
                 <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="bg-blue-600 px-3 py-1 rounded-full text-sm font-semibold mb-2">
-                      PRÓXIMAMENTE
-                    </div>
-                    <div className="text-2xl font-bold">${pez.price}</div>
+                  <div className="text-white text-center">
+                    <div className="bg-blue-600 px-3 py-1 rounded-full text-sm mb-2">PRÓXIMAMENTE</div>
                   </div>
                 </div>
-
-                {/* Etiqueta de rareza */}
                 <div className="absolute top-3 left-3">
-                  <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getRarezaColor(pez.rareza)}`}>
-                    {pez.rareza}
+                  <span className={`px-2 py-1 rounded-full text-xs font-semibold ${getRarezaColor(pez.categoria)}`}>
+                    {pez.categoria}
                   </span>
                 </div>
-
-                {/* Contador de días */}
                 <div className="absolute top-3 right-3 bg-white rounded-full px-3 py-1">
                   <span className="text-xs font-bold text-gray-800">
                     {getDiasRestantes(pez.fechaLlegada)} días
                   </span>
                 </div>
               </div>
-
               <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{pez.name}</h3>
-                <p className="text-gray-600 mb-3">{pez.description}</p>
-                
-                <div className="mb-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-gray-500">Categoría:</span>
-                    <span className="text-sm font-medium text-blue-600">{pez.categoria}</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500">Fecha estimada:</span>
-                    <span className="text-sm font-medium text-gray-700">{formatearFecha(pez.fechaLlegada)}</span>
-                  </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{pez.nombre}</h3>
+                <p className="text-gray-600 mb-3">{pez.descripcion}</p>
+                <div className="mb-4 text-sm text-gray-700">
+                  <strong>Fecha estimada:</strong> {formatearFecha(pez.fechaLlegada)}
                 </div>
-
-                <button 
+                <button
                   onClick={() => handleNotificarme(pez)}
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                  className="w-full bg-gradient-to-r from-green-600 to-lime-600 text-white py-2 px-4 rounded-lg hover:opacity-90 transition"
                 >
-                  🔔 Notificarme cuando llegue
+                  🔔 Notificarme cuando llegue (WhatsApp)
                 </button>
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Sección de información adicional */}
-        <div className="mt-16 bg-white rounded-xl shadow-lg p-8">
-          <div className="text-center mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-4">¿Cómo funciona?</h3>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🔔</span>
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-2">1. Suscríbete</h4>
-              <p className="text-gray-600 text-sm">Haz clic en "Notificarme" para recibir avisos cuando llegue tu pez favorito</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">📧</span>
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-2">2. Te avisamos</h4>
-              <p className="text-gray-600 text-sm">Recibirás un email tan pronto como el pez llegue a nuestra tienda</p>
-            </div>
-            
-            <div className="text-center">
-              <div className="bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl">🛒</span>
-              </div>
-              <h4 className="font-semibold text-gray-900 mb-2">3. Compra primero</h4>
-              <p className="text-gray-600 text-sm">Tendrás prioridad de compra sobre otros clientes durante 48 horas</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

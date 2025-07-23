@@ -8,6 +8,7 @@ import ThemeToggle from './components/temapagina';
 
 
 
+
 function App() {
   return (
     <>
@@ -18,20 +19,21 @@ function App() {
               <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
               </div>
-            </div>    
-            <Link to="/" className="btn btn-ghost text-xl">
+            </div>
+            <Link to="/" className="inline-block rounded-full overflow-hidden hover:opacity-80 transition">
               <img
-                src="./imagenes/DulcevidaLogo.png" // Cambia esto por la ruta real de tu imagen
+                src="./imagenes/DulceVidaFondo1.png" // Asegúrate que la ruta sea correcta
                 alt="Dulce Vida"
-                className="h-20 w-auto" // Ajusta el tamaño como necesites
+                className="h-30 w-30 object-cover rounded-full"
               />
-            </Link>          </div>
+            </Link>
+          </div>
           <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">
               <Link to="/galeria_peces" className="btn btn-ghost text-xl">Productos</Link>
               <Link to="/proximamente" className="btn btn-ghost text-xl">¡Proximamente!</Link>
               <Link to="/About" className="btn btn-ghost text-xl">¡Sobre nosotros!</Link>
-              <Link to="/contacto" className="btn btn-ghost text-xl">Contacto</Link>
+              <Link to="/contacto" className="btn btn-ghost text-xl">Reseñas</Link>
 
             </ul>
           </div>
