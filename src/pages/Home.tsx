@@ -41,7 +41,7 @@ const Acuario_Dulcevida: React.FC = () => {
               <div className="text-left space-y-8">
                 <div className="space-y-4">
                   <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
-                    Línea Acuatica
+                    Dulce Vida
                     {/* Texto con gradiente para resaltar */}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
                       Acuario de peces Ornamentales
@@ -50,7 +50,7 @@ const Acuario_Dulcevida: React.FC = () => {
 
                   <p className="text-lg text-blue-100 max-w-md">
                     {/* Descripción inspiradora sobre la línea acuática */}
-                    Línea Acuática: donde el agua cobra vida y la naturaleza se hace arte.
+                    Dulce Vida : donde el agua cobra vida y la naturaleza se hace arte.
                     En nuestro acuario, cada movimiento, cada burbuja y cada planta sumergida cuenta una historia...
                   </p>
                 </div>
