@@ -84,7 +84,7 @@ const About: React.FC = () => {
             </div>
           </div>
           <img
-            src="./imagenes/instalaciones.jpeg"
+            src="/imagenes/instalaciones.jpeg"
             className="w-full object-cover rounded-2xl shadow-lg"
             alt="Instalaciones"
           />
