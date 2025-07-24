@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Calificacion from './calificacion'; // Importar el componente de calificación
 
 export const ProductCards = () => {
