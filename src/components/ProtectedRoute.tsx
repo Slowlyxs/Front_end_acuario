@@ -1,14 +1,23 @@
-// components/ProtectedRoute.tsx
 import React from 'react';
+import type { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
 
-export const ProtectedAdminRoute = ({ children }: { children: React.ReactNode }) => {
-  const { isAdmin } = useAuth();
+interface Props {
+  children: ReactNode;
+}
 
-  if (!isAdmin) {
+export function ProtectedAdminRoute({ children }: Props) {
+  const userStr = localStorage.getItem('user');
+  if (!userStr) {
+    return <Navigate to="/LoginPage" replace />;
+  }
+
+  const user = JSON.parse(userStr);
+
+  if (user.role !== 'admin') {
+    alert('No tienes permiso para acceder a esta página');
     return <Navigate to="/" replace />;
   }
 
   return <>{children}</>;
-};
+}

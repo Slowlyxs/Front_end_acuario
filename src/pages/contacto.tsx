@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Definición de la interfaz para cada reseña
 interface Reseña {
   id: number;
   nombreCliente: string;
@@ -9,6 +10,7 @@ interface Reseña {
 }
 
 const Resenas: React.FC = () => {
+  // Estados para almacenar las reseñas, formulario y manejo de errores y carga
   const [resenas, setResenas] = useState<Reseña[]>([]);
   const [nombreCliente, setNombreCliente] = useState('');
   const [rating, setRating] = useState(5);
@@ -16,19 +18,19 @@ const Resenas: React.FC = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const API_URL = 'https://acuario-backends.onrender.com/testimonios'; // Cambia esta URL a la correcta
+  const API_URL = 'https://acuario-backends.onrender.com/testimonios'; // Endpoint para obtener y enviar reseñas
 
-  // Cargar reseñas al montar componente
+  // useEffect para cargar las reseñas del backend al montar el componente
   useEffect(() => {
     axios.get(API_URL)
-      .then(res => setResenas(res.data))
+      .then(res => setResenas(res.data)) // Guarda las reseñas recibidas
       .catch(err => {
         console.error('Error al cargar reseñas:', err);
         setError('Error cargando reseñas, intenta más tarde.');
       });
   }, []);
 
-  // Validar formulario básico
+  // Validación básica del formulario antes de enviar
   const validarFormulario = () => {
     if (!nombreCliente.trim() || !comentario.trim()) {
       setError('Por favor completa todos los campos.');
@@ -42,25 +44,22 @@ const Resenas: React.FC = () => {
     return true;
   };
 
+  // Maneja el envío del formulario para agregar una nueva reseña
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validarFormulario()) return;
 
     setLoading(true);
     try {
-      const nuevo = {
-        nombreCliente,
-        rating,
-        comentario
-      };
+      const nuevo = { nombreCliente, rating, comentario };
 
-      // Enviar la reseña al backend
+      // POST para enviar la nueva reseña al backend
       const { data } = await axios.post(API_URL, nuevo);
 
-      // Agregar la nueva reseña a la lista
+      // Actualiza la lista de reseñas agregando la nueva al inicio
       setResenas(prev => [data, ...prev]);
 
-      // Limpiar formulario
+      // Limpia el formulario y error
       setNombreCliente('');
       setRating(5);
       setComentario('');
@@ -73,7 +72,7 @@ const Resenas: React.FC = () => {
     }
   };
 
-  // Función para mostrar estrellas
+  // Función para renderizar estrellas amarillas según el rating (1-5)
   const renderStars = (num: number) => {
     return [...Array(5)].map((_, i) => (
       <span key={i} className={i < num ? 'text-yellow-400' : 'text-gray-300'}>★</span>
@@ -84,7 +83,7 @@ const Resenas: React.FC = () => {
     <section className="max-w-4xl mx-auto p-4">
       <h2 className="text-3xl font-bold mb-6 text-center">Reseñas de Nuestros Clientes</h2>
 
-      {/* Formulario para enviar reseña */}
+      {/* Formulario controlado para enviar nueva reseña */}
       <form onSubmit={handleSubmit} className="mb-10 space-y-4">
         <div>
           <label className="block mb-1 font-semibold">Nombre del Cliente</label>
@@ -123,8 +122,10 @@ const Resenas: React.FC = () => {
           />
         </div>
 
+        {/* Mostrar error si hay */}
         {error && <p className="text-red-600">{error}</p>}
 
+        {/* Botón de envío con estado loading */}
         <button
           type="submit"
           disabled={loading}
@@ -134,7 +135,7 @@ const Resenas: React.FC = () => {
         </button>
       </form>
 
-      {/* Listado de reseñas */}
+      {/* Listado de reseñas obtenidas */}
       <div>
         {resenas.length === 0 ? (
           <p className="text-center text-gray-500">No hay reseñas todavía.</p>

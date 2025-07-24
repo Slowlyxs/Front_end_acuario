@@ -9,8 +9,9 @@ import Dashboard from './admin/Dashboard';
 import ProductosAdmin from './admin/ProductosAdmin';
 import ProximosProductosAdmin from './admin/ProximosProductosAdmin';
 import ResenasAdmin from './admin/ReseñasAdmin';
+import NuestroEquipoAdmin from "./admin/NuestroequipoAdmin";
 
-import { ProtectedAdminRoute } from './components/ProtectedRoute'; // Asegúrate que exista
+import { ProtectedAdminRoute } from './components/ProtectedRoute.tsx';
 
 export default function AppRoutes() {
   return (
@@ -52,6 +53,14 @@ export default function AppRoutes() {
         element={
           <ProtectedAdminRoute>
             <ResenasAdmin />
+          </ProtectedAdminRoute>
+        }
+      />
+      <Route
+        path="/admin/NuestroequipoAdmin"
+        element={
+          <ProtectedAdminRoute>
+            <NuestroEquipoAdmin />
           </ProtectedAdminRoute>
         }
       />

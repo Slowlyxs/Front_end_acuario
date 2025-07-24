@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const About: React.FC = () => {
-  // Estadísticas clave de la empresa
+  // Estadísticas clave de la empresa, con íconos y texto explicativo
   const estadisticas = [
     { numero: '5+', texto: 'Años de experiencia', icono: '🏆' },
     { numero: '100+', texto: 'Especies disponibles', icono: '🐠' },
@@ -10,10 +10,10 @@ const About: React.FC = () => {
     { numero: '24/7', texto: 'Soporte técnico', icono: '🛠️' }
   ];
 
-  // Estado para equipo cargado desde backend
+  // Estado local para almacenar el equipo de trabajo cargado desde el backend
   const [equipo, setEquipo] = useState<any[]>([]);
 
-  // Valores de la empresa
+  // Valores y principios de la empresa para mostrar en cards
   const valores = [
     {
       icono: '🌊',
@@ -37,16 +37,16 @@ const About: React.FC = () => {
     }
   ];
 
-  // Cargar equipo desde backend al montar componente
+  // Hook useEffect para cargar datos del equipo desde un endpoint backend al montar el componente
   useEffect(() => {
     axios.get('https://acuario-backends.onrender.com/equipo')
-      .then(res => setEquipo(res.data))
-      .catch(err => console.error('Error cargando equipo:', err));
+      .then(res => setEquipo(res.data)) // Guarda el equipo recibido en estado local
+      .catch(err => console.error('Error cargando equipo:', err)); // Manejo básico de errores
   }, []);
 
   return (
     <div className="bg-base-100 text-base-content">
-      {/* Hero principal con fondo gradiente y texto blanco */}
+      {/* Sección hero con fondo degradado azul y texto centrado blanco */}
       <section className="hero min-h-[60vh]  bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 text-white">
         <div className="hero-content text-center flex-col">
           <h1 className="text-5xl font-bold mb-6">Sobre Nosotros</h1>
@@ -56,7 +56,7 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Sección de estadísticas con DaisyUI - stat */}
+      {/* Sección de estadísticas con DaisyUI - muestra íconos, títulos y números clave */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-8">
           {estadisticas.map((stat, index) => (
@@ -69,28 +69,18 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Historia de la empresa con imagen e información */}
+      {/* Sección "Nuestra Historia" con texto explicativo y una imagen representativa */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-4xl font-bold mb-6">Nuestra Historia</h2>
             <div className="space-y-4 leading-relaxed opacity-80">
-              <p>
-                Todo comenzó en 2017 cuando Carlos Mendoza, un apasionado biólogo marino,
-                decidió convertir su hobby en una misión: hacer que la acuariofilia sea accesible para todos.
-              </p>
-              <p>
-                Lo que inició como una pequeña tienda local ha crecido hasta convertirse en una referencia nacional en el mundo de los peces ornamentales
-              </p>
-              <p>
-                Con el tiempo, hemos ampliado nuestro catálogo, incorporando especies exóticas y ofreciendo
-              </p>
-              <p>
-                asesoría especializada para ayudar a nuestros clientes a crear y mantener acuarios saludables y hermosos.
-              </p>
-              <p>
-                Hoy contamos con instalaciones modernas, un equipo de expertos y la confianza de miles de acuaristas.
-              </p>
+              {/* Varios párrafos explicando los orígenes y evolución de la empresa */}
+              <p>Todo comenzó en 2017 cuando Carlos Mendoza, un apasionado biólogo marino, decidió convertir su hobby en una misión: hacer que la acuariofilia sea accesible para todos.</p>
+              <p>Lo que inició como una pequeña tienda local ha crecido hasta convertirse en una referencia nacional en el mundo de los peces ornamentales</p>
+              <p>Con el tiempo, hemos ampliado nuestro catálogo, incorporando especies exóticas y ofreciendo</p>
+              <p>asesoría especializada para ayudar a nuestros clientes a crear y mantener acuarios saludables y hermosos.</p>
+              <p>Hoy contamos con instalaciones modernas, un equipo de expertos y la confianza de miles de acuaristas.</p>
             </div>
           </div>
           <img
@@ -101,7 +91,7 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Valores con DaisyUI - card */}
+      {/* Sección de valores de la empresa, mostrados en cards con íconos */}
       <section className="py-16 bg-base-200">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12">Nuestros Valores</h2>
@@ -119,7 +109,7 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      {/* Equipo con DaisyUI - card */}
+      {/* Sección del equipo - muestra una card por cada miembro con foto y descripción */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12">Conoce a Nuestro Equipo</h2>
@@ -144,13 +134,14 @@ const About: React.FC = () => {
                 </div>
               ))
             ) : (
+              // Mensaje de carga mientras se obtiene el equipo
               <p className="text-center text-gray-500">Cargando equipo...</p>
             )}
           </div>
         </div>
       </section>
 
-      {/* Misión con fondo y columnas */}
+      {/* Sección de misión con fondo degradado azul y tres valores resumidos con iconos */}
       <section className="hero bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white py-16">
         <div className="hero-content text-center flex-col max-w-4xl mx-auto">
           <h2 className="text-4xl font-bold mb-8">Nuestra Misión</h2>

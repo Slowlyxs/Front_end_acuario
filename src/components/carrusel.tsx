@@ -28,7 +28,7 @@ const Carrusel: React.FC = () => {
         modules={[Autoplay, FreeMode]}
         loop={true}
         freeMode={true}
-        freeModeMomentum={false}
+        grabCursor={true}
         speed={10000}
         autoplay={{
           delay: 0,
