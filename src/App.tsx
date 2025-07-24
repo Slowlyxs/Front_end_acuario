@@ -22,7 +22,7 @@ function App() {
             </div>
             <Link to="/" className="inline-block rounded-full overflow-hidden hover:opacity-80 transition">
               <img
-                src="/imagenes/DulceVidaFondo1.png" // Asegúrate que la ruta sea correcta
+                src="/imagenes/DulcevidaFondo1.png" // Asegúrate que la ruta sea correcta
                 alt="Dulce Vida"
                 className="h-30 w-30 object-cover rounded-full"
               />
