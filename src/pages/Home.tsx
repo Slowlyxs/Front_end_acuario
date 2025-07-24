@@ -57,8 +57,8 @@ const Acuario_Dulcevida: React.FC = () => {
 
                 {/* Botones de acción con navegación usando Link de react-router */}
                 <div className="flex flex-wrap gap-4">
-                  <Link 
-                    to="/galeria_peces" 
+                  <Link
+                    to="/galeria_peces"
                     className="btn btn-warning btn-lg text-white font-semibold px-8 hover:scale-105 transition-all duration-300 shadow-lg"
                   >
                     <span>Comprar</span>
@@ -67,8 +67,8 @@ const Acuario_Dulcevida: React.FC = () => {
                   <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
-                  <Link 
-                    to="/About" 
+                  <Link
+                    to="/About"
                     className="btn btn-lg font-semibold px-8 hover:scale-105 transition-all duration-300 shadow-lg bg-white text-gray-800 hover:bg-gray-100 border border-gray-300"
                   >
                     <span>Sobre nosotros</span>
@@ -87,7 +87,7 @@ const Acuario_Dulcevida: React.FC = () => {
                 {/* Imagen principal del pez con animación flotante */}
                 <div className="animate-float">
                   <img
-                    src="./public/imagenes/betaderecha.png"
+                    src="/imagenes/betaderecha.png"
                     className="w-180 h-120 object-contain drop-shadow-2xl filter brightness-110 contrast-110"
                   />
                 </div>
@@ -95,8 +95,8 @@ const Acuario_Dulcevida: React.FC = () => {
 
               {/* Imagen adicional con animación de nado */}
               <img
-                src="./public/imagenes/betaend.png"
-                className="absolute top-40 right-0 left-150 w-180 h-120 object-contain drop-shadow-2xl filter brightness-110 contrast-110 animate-swim" 
+                src="/imagenes/betaend.png"
+                className="absolute top-40 right-0 left-150 w-180 h-120 object-contain drop-shadow-2xl filter brightness-110 contrast-110 animate-swim"
               />
             </div>
           </div>
