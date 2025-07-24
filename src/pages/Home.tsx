@@ -87,7 +87,7 @@ const Acuario_Dulcevida: React.FC = () => {
                 {/* Imagen principal del pez con animación flotante */}
                 <div className="animate-float">
                   <img
-                    src="./imagenes/betaderecha.png"
+                    src="./public/imagenes/betaderecha.png"
                     className="w-180 h-120 object-contain drop-shadow-2xl filter brightness-110 contrast-110"
                   />
                 </div>
@@ -95,7 +95,7 @@ const Acuario_Dulcevida: React.FC = () => {
 
               {/* Imagen adicional con animación de nado */}
               <img
-                src="./imagenes/betaend.png"
+                src="./public/imagenes/betaend.png"
                 className="absolute top-40 right-0 left-150 w-180 h-120 object-contain drop-shadow-2xl filter brightness-110 contrast-110 animate-swim" 
               />
             </div>
