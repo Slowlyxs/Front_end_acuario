@@ -80,11 +80,11 @@ const About: React.FC = () => {
               <p>Lo que inició como una pequeña tienda local ha crecido hasta convertirse en una referencia nacional en el mundo de los peces ornamentales</p>
               <p>Con el tiempo, hemos ampliado nuestro catálogo, incorporando especies exóticas y ofreciendo</p>
               <p>asesoría especializada para ayudar a nuestros clientes a crear y mantener acuarios saludables y hermosos.</p>
-              <p>Hoy contamos con instalaciones modernas, un equipo de expertos y la confianza de miles de acuaristas.</p>
+              <p>Hoy contamos con instalaciones smodernas, un equipo de expertos y la confianza de miles de acuaristas.</p>
             </div>
           </div>
           <img
-            src="./imagenes/instalaciones.jpeg"
+            src="/imagenes/Instalaciones.jpeg"
             className="w-full object-cover rounded-2xl shadow-lg"
             alt="Instalaciones"
           />
