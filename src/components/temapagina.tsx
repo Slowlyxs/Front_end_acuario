@@ -8,7 +8,7 @@ const ThemeToggle: React.FC = () => {
   }, [theme]);
 
   const toggleTheme = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTheme(e.target.checked ? "synthwave" : "light");
+    setTheme(e.target.checked ? "dark" : "light");
   };
 
   return (
