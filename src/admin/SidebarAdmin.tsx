@@ -8,7 +8,7 @@ const SidebarAdmin = () => {
         <li><Link to="/admin">Inicio</Link></li>
         <li><Link to="/admin/productos">Productos</Link></li>
         <li><Link to="/admin/proximos-productos">Próximos Productos</Link></li>
-        Ç<li><Link to="/admin/NuestroequipoAdmin">Nuestro Equipo</Link></li>
+        <li><Link to="/admin/NuestroequipoAdmin">Nuestro Equipo</Link></li>
         <li><Link to="/admin/reseñasadmin">Reseñas</Link></li>
       </ul>
     </div>
