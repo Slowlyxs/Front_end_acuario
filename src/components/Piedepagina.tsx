@@ -13,7 +13,7 @@ export const Piedepagina: React.FC = () => {
             Contacto
           </Link>
           <a
-            href="https://wa.me/593999999999" // <-- Cambia a tu número de WhatsApp
+            href="https://wa.me/593999999990" // <-- Cambia a tu número de WhatsApp
             target="_blank"
             rel="noopener noreferrer"
             className="link link-hover"
